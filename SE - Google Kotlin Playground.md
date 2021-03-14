@@ -2,9 +2,7 @@
 
 Notes of the first 6 lessons of "Programmazione di Sistemi Embedded", following the Google Android Bootcamp for Kotlin 
 
-https://developer.android.com/courses/kotlin-bootcamp/overview
-
-
+<a href=https://developer.android.com/courses/kotlin-bootcamp/overview>Kotlin Bootcamp</a>
 
 ## Bootcamp 2 - Basis
 
@@ -902,4 +900,305 @@ fun matchSeal(seal: Seal): String {
 ```
 
 ___
+
+## Bootcamp 5.1 - Extensions
+
+Pairs and triples are premade data classes for 2 or 3 generic items. This can, for example, be useful for having a function return more than one value.
+
+### Creating pairs and triples
+
+```kotlin
+fun main(){
+	val equipment = "fish net" to "catching fish"
+	println("${equipment.first} used for ${equipment.second}")
+	val numbers = Triple(6, 9, 42)
+	println(numbers.toString())
+	println(numbers.toList())
+}
+```
+### Destruture some pairs and triples
+
+```kotlin
+fun main(){
+  val equipment = "fish net" to "catching fish"
+  val (tool, use) = equipment
+  println("$tool is used for $use")
+  val numbers = Triple(6, 9, 42)
+  val (n1, n2, n3) = numbers
+  println("$n1 $n2 $n3")
+}
+```
+___
+
+### Collections
+
+##### List
+
+Lists and mutable lists are a very useful data structure, so Kotlin provides a number of built-in functions for lists. 
+
+Kotlin documentation:  <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html >List</a> and <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html >MutableList</a>
+
+| **Function**                            | **Purpose**                                                  |
+| --------------------------------------- | ------------------------------------------------------------ |
+| `add(element: E)`                       | Add an item to the mutable list.                             |
+| `remove(element: E)`                    | Remove an item from a mutable list.                          |
+| `reversed()`                            | Return a copy of the list with the elements in reverse order. |
+| `contains(element: E)`                  | Return `true` if the list contains the item.                 |
+| `subList(fromIndex: Int, toIndex: Int)` | Return part of the list, from the first index up to but not including the second index. |
+
+Some example of methods on list objects
+
+```kotlin
+fun main(){
+    val list = listOf(1, 5, 3, 4)
+    println(list.sum())
+    
+    val list2 = listOf("a", "bbb", "cc")
+    //Can't invoke sum() on list2 because how to sum strings is not defined
+    println(list2.sumBy { it.length })
+    
+	for (s in list2.listIterator()) {
+    	println("$s ")
+	}
+}
+```
+
+##### HashMap
+
+Hash maps are sort of like a list of pairs, where the first value acts as a key.
+
+```kotlin
+fun main(){
+  //This map is not mutable
+	val cures = hashMapOf("white spots" to "Ich", "red sores" to "hole disease")
+    
+  println(cures.get("white spots"))
+  println(cures["red sores"])
+
+  println(cures["scale loss"])
+
+  println(cures.getOrDefault("bloating", "sorry, I don't know"))
+
+  println(cures.getOrElse("bloating") {"No cure for this"})
+}
+```
+
+Just like `mutableListOf`, you can also make a `mutableMapOf`. A mutable map lets you put and remove items. Mutable just means able to change, immutable means unable to change.
+
+```kotlin
+fun main(){
+    val inventory = mutableMapOf("fish net" to 1)
+    inventory.put("tank scrubber", 3)
+    println(inventory.toString())
+    inventory.remove("fish net")
+    println(inventory.toString())
+}
+```
+
+**Note:** Immutable collections are particularly useful in a threaded environment where there might be problems if multiple threads touch the same collection.
+
+___
+
+### const vs val
+
+What's the difference between `const val` and `val`? The value for `const val` is determined at compile time, where as the value for `val` is determined during program execution, which means, `val` can be assigned by a function at run time. That means `val` can be assigned a value from a function, but `const val` cannot.
+
+```kotlin
+val value1 = complexFunctionCall() // OK
+const val CONSTANT1 = complexFunctionCall() // NOT ok
+```
+
+
+
+You can use `const val` to create a file or singleton object that contains only constants, and import them as needed.
+
+```kotlin
+object Constants {
+    const val CONSTANT2 = "object constant"
+}
+val foo = Constants.CONSTANT2
+```
+
+___
+
+### Companion Objects
+
+The companion object is basically a singleton object within the class.
+
+The basic difference between companion objects and regular objects is:
+
+- Companion objects are initialized from the static constructor of the containing class, that is, they are created when the object is created.
+- Regular objects are initialized lazily on the first access to that object; that is, when they are first used.
+
+```kotlin
+class MyClass {
+    companion object {
+        const val CONSTANT3 = "constant in companion"
+    }
+}
+```
+
+___
+
+### Extensions
+
+It's very common to write utility functions to extend the behavior of a class. Kotlin provides a convenient syntax for declaring these utility functions: extension functions.
+
+Extension functions allow you to add functions to an existing class without having to access its source code.
+
+Extension functions only have access to the public API of the class they're extending. Variables that are `private` can't be accessed.
+
+```kotlin
+fun String.hasSpaces(): Boolean {
+    val found = this.find { it == ' ' }
+    return found != null
+}
+println("Does it have spaces?".hasSpaces())
+```
+
+
+
+In addition to extension functions, Kotlin also lets you add extension properties. Like extension functions, you specify the class you're extending, followed by a dot, followed by the property name.
+
+
+
+The class you extend is called the *receiver*, and it is possible to make that class nullable. If you do that, the `this` variable used in the body can be `null`, so make sure you test for that.
+
+___
+
+## Bootcamp 5.2 - Generics
+
+Kotlin, like many programming languages, has generic types.
+
+With generics, you can make (for example) a list generic, so it can hold any type of object. 
+
+It's like making the type a wildcard that will fit many types.
+
+To define a generic type, put T in angle brackets `<T>` after the class name. (Like in Java)
+
+```kotlin
+class MyList<T> {
+    fun get(pos: Int): T {
+        TODO("implement")
+    }
+    fun addItem(item: T) {}
+}
+```
+
+You can reference `T` as if it were a normal type. The return type for `get()` is `T`, and the parameter to `addItem()` is of type `T`.
+
+To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-generics/#1>Kotlin Bootcamp</a>
+
+___
+
+### IN and OUT types
+
+An `in` type is a type that can only be passed into a class, not returned.
+
+An `out` type is a type that can only be returned from a class.
+
+This allows Kotlin to do extra checks for code safety.
+
+To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-generics/#2>Kotlin Bootcamp</a>
+
+___
+
+### Generic functions
+
+Sometimes `out` or `in` is too restrictive because you need to use a type for both input and output. You can remove the `out` requirement by making the function generic.
+
+```kotlin
+fun <T: WaterSupply> isWaterClean(aquarium: Aquarium<T>) {
+   println("aquarium water is clean: ${!aquarium.waterSupply.needsProcessing}")
+}
+```
+
+To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-generics/#3>Kotlin Bootcamp</a>
+
+## Bootcamp 6 - Functional manipulation
+
+### Annotations
+
+Annotations are a way of attaching metadata to code, and are not something specific to Kotlin. The annotations are read by the compiler and used to generate code or logic.
+
+To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-sams#1>Kotlin Bootcamp</a>
+
+___
+
+### Labeled breaks
+
+Kotlin gives you additional control over loops with what's called a [labeled break](https://kotlinlang.org/docs/reference/returns.html#break-and-continue-labels). 
+
+A `break` qualified with a label jumps to the execution point right after the loop marked with that label. 
+
+This is particularly useful when dealing with nested loops.
+
+```kotlin
+fun labels() {
+    outerLoop@ for (i in 1..100) {
+         print("$i ")
+         for (j in 1..100) {
+             if (i > 10) break@outerLoop  // breaks to outer loop
+        }
+    }
+}
+
+fun main() {
+    labels()
+}
+```
+
+Similarly, you can use a labeled `continue`. Instead of breaking out of the labeled loop, the labeled continue proceeds to the next iteration of the loop.
+
+___
+
+### Create simple lambdas
+
+Lambdas are anonymous functions, which are functions with no name.
+
+You can assign them to variables and pass them as arguments to functions and methods.
+
+They are extremely useful.
+
+```kotlin
+val waterFilter = { dirty: Int -> dirty / 2 }
+```
+
+
+
+Creating a lambda function that filters all the names containing characher 'i'.
+
+```kotlin
+data class Fish(val name: String)
+fun main(){
+  val myFish = listOf(Fish("Flipper"), Fish("Moby Dick"), Fish("Dory"))
+  	
+  /**
+  	it refers to an element of myFish list, 
+  	it's like iterating over the elements of the list
+  */ 
+  val res = myFish.filter { it.name.contains("i")}.joinToString(", ") { it.name }
+  println(res)
+}
+```
+
+___
+
+### Higher order function
+
+Passing a lambda or other function as an argument to a function creates a higher-order function.
+
+To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-sams#4>Kotlin Bootcamp</a>
+
+___
+
+### Inline functions
+
+Lambdas and higher-order functions are really useful, but there is something you should know: lambdas are objects. 
+
+A lambda expression is an instance of a `Function` interface, which is itself a subtype of `Object`.
+
+Kotlin provides `inline` as a way to handle this case to reduce overhead during runtime by adding a bit more work for the compiler. Marking a function as `inline` means that every time the function is called, the compiler will actually transform the source code to "inline" the function.
+
+To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-sams#5>Kotlin Bootcamp</a>
 
