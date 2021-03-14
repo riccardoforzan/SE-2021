@@ -379,3 +379,115 @@ ___
 
 ### Filters
 
+```kotlin
+fun main() {
+	val decorations = listOf ("rock", "pagoda", "plastic plant", "alligator", "flowerpot")
+  println( decorations.filter {it[0] == 'p'})
+}
+```
+
+in the expresison `it[0]=='p'` , `it` refers to each item as the filter loops through. 
+
+If the expression returns `true`, the item is included.
+
+
+
+Filters can be **eager** or **lazy**. By default filters are eager.
+
+```kotlin
+fun main() {
+    val decorations = listOf ("rock", "pagoda", "plastic plant", "alligator", "flowerpot")
+
+    // eager, creates a new list
+    val eager = decorations.filter { it [0] == 'p' }
+    println("eager: $eager")
+  
+    // lazy, will wait until asked to evaluate
+    val filtered = decorations.asSequence().filter { it[0] == 'p' }
+    println("filtered: $filtered")
+  
+    val newList = filtered.toList()
+    println("new list: $newList")
+}
+```
+
+The output of this code snippet is 
+
+```kotlin
+eager: [pagoda, plastic plant]
+filtered: kotlin.sequences.FilteringSequence@386cc1c4
+new list: [pagoda, plastic plant]
+```
+
+To visualize what's going on with the `Sequence` and lazy evaluation, use the `map()` function.
+
+The `map()` function performs a simple transformation on each element in the sequence.
+
+___
+
+### Lambda Functions
+
+A *lambda* is an expression that makes a function. 
+
+But instead of declaring a named function, you declare a function that has no name.
+
+Lambda expression can now be passed as data. 
+
+In other languages, lambdas are called *anonymous functions*
+
+For lambdas, parameters (and their types, if needed) go on the left of what is called a function arrow `->`. 
+
+The code to execute goes to the right of the function arrow. 
+
+Once the lambda is assigned to a variable, you can call it just like a function.
+
+```kotlin
+var dirtyLevel = 20
+val waterFilter = { dirty : Int -> dirty / 2}
+println(waterFilter(dirtyLevel))
+```
+
+Another example specifying the return type
+
+```kotlin
+val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
+```
+
+Here's what the code says:
+
+- Make a variable called `waterFilter`.
+- `waterFilter` can be any function that takes an `Int` and returns an `Int`.
+- Assign a lambda to `waterFilter`.
+- The lambda returns the value of the argument `dirty` divided by 2.
+
+
+
+The real power of lambdas is using them to create higher-order functions, where the argument to one function is another function.
+
+```kotlin
+fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {
+   return operation(dirty)
+}
+
+val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
+println(updateDirty(30, waterFilter))
+```
+
+The body of the code calls the function that was passed as the second argument, and passes the first argument along to it.
+
+
+
+The function you pass doesn't have to be a lambda; it can be a regular named function instead.
+
+To specify the argument as a regular function use the `::` operator
+
+```kotlin
+fun increaseDirty( start: Int ) = start + 1
+
+println(updateDirty(15, ::increaseDirty))
+```
+
+___
+
+## Bootcamp 4 - Object Oriented Programming
+
