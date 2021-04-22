@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Save Persistent State</string>
+    <string name="text">Text</string>
+    <string name="color">Color</string>
+    <string name="size">Size</string>
+    <string name="allcaps">All caps</string>
+    <string name="default_text">Hello World!</string>
+    <string name="default_color">FF669900</string>
+    <string name="hint_text">Short text</string>
+    <string name="hint_color">Format: alpha-R-G-B</string>
+</resources>

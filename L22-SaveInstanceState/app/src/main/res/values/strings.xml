@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Save Instance State</string>
+    <string name="pressme">Press me</string>
+    <string name="pressplease">Press the button, please</string>
+    <string name="goodjob">Good job!</string>
+</resources>
