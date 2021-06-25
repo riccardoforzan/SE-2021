@@ -1,8 +1,6 @@
 # Kotlin bootcamp notes
 
-Notes of the first 6 lessons of "Programmazione di Sistemi Embedded", following the Google Android Bootcamp for Kotlin 
-
-<a href=https://developer.android.com/courses/kotlin-bootcamp/overview>Kotlin Bootcamp</a>
+Notes of the first 6 lessons of "Programmazione di Sistemi Embedded", following the [Google Kotlin Bootcamp](https://developer.android.com/courses/kotlin-bootcamp/overview)
 
 ## Bootcamp 2 - Basis
 
@@ -13,8 +11,6 @@ Kotlin supports two types of variables: changeable and unchangeable.
 With  `val`, you can assign a value once. If you try to assign something again, you get an error. 
 
 With `var`, you can assign a value, then change the value later in the program.
-
-
 
 The type you store in a variable is inferred when the compiler can figure it out from context. If you want, you can always specify the type of a variable explicitly, using the colon notation
 
@@ -830,8 +826,7 @@ object GoldColor : FishColor {
 }
 ```
 
-<a href=https://developer.android.com/codelabs/kotlin-bootcamp-classes/#7>Documentation</a>
-
+[Documentation](https://developer.android.com/codelabs/kotlin-bootcamp-classes/#7)
 ___
 
 ### Data class
@@ -858,7 +853,7 @@ If you don't need one or more of the properties, you can skip them by using `_` 
 val (property1, _, property3) = my_object
 ```
 
-<a href=https://developer.android.com/codelabs/kotlin-bootcamp-classes/#8>Documentation</a>
+[Documentation](https://developer.android.com/codelabs/kotlin-bootcamp-classes/#8)
 
 ___
 
@@ -936,7 +931,9 @@ ___
 
 Lists and mutable lists are a very useful data structure, so Kotlin provides a number of built-in functions for lists. 
 
-Kotlin documentation:  <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html >List</a> and <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html >MutableList</a>
+Kotlin documentation:  
+* [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)
+* [MutableList](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html)
 
 | **Function**                            | **Purpose**                                                  |
 | --------------------------------------- | ------------------------------------------------------------ |
@@ -1087,7 +1084,7 @@ class MyList<T> {
 
 You can reference `T` as if it were a normal type. The return type for `get()` is `T`, and the parameter to `addItem()` is of type `T`.
 
-To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-generics/#1>Kotlin Bootcamp</a>
+To see more examples: [Kotlin Bootcamp](https://developer.android.com/codelabs/kotlin-bootcamp-generics/#1)
 
 ___
 
@@ -1099,7 +1096,7 @@ An `out` type is a type that can only be returned from a class.
 
 This allows Kotlin to do extra checks for code safety.
 
-To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-generics/#2>Kotlin Bootcamp</a>
+To see more examples: [Kotlin Bootcamp](https://developer.android.com/codelabs/kotlin-bootcamp-generics/#2)
 
 ___
 
@@ -1113,7 +1110,7 @@ fun <T: WaterSupply> isWaterClean(aquarium: Aquarium<T>) {
 }
 ```
 
-To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-generics/#3>Kotlin Bootcamp</a>
+To see more examples: [Kotlin Bootcamp](https://developer.android.com/codelabs/kotlin-bootcamp-generics/#3)
 
 ## Bootcamp 6 - Functional manipulation
 
@@ -1121,7 +1118,7 @@ To see more examples: <a href=https://developer.android.com/codelabs/kotlin-boot
 
 Annotations are a way of attaching metadata to code, and are not something specific to Kotlin. The annotations are read by the compiler and used to generate code or logic.
 
-To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-sams#1>Kotlin Bootcamp</a>
+To see more examples: [Kotlin Bootcamp](https://developer.android.com/codelabs/kotlin-bootcamp-sams#1)
 
 ___
 
@@ -1188,7 +1185,7 @@ ___
 
 Passing a lambda or other function as an argument to a function creates a higher-order function.
 
-To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-sams#4>Kotlin Bootcamp</a>
+To see more examples: [Kotlin Bootcamp](https://developer.android.com/codelabs/kotlin-bootcamp-sams#4>Kotlin Bootcamp)
 
 ___
 
@@ -1200,5 +1197,10 @@ A lambda expression is an instance of a `Function` interface, which is itself a 
 
 Kotlin provides `inline` as a way to handle this case to reduce overhead during runtime by adding a bit more work for the compiler. Marking a function as `inline` means that every time the function is called, the compiler will actually transform the source code to "inline" the function.
 
-To see more examples: <a href=https://developer.android.com/codelabs/kotlin-bootcamp-sams#5>Kotlin Bootcamp</a>
+To see more examples: [Kotlin Bootcamp](https://developer.android.com/codelabs/kotlin-bootcamp-sams#5)
 
+____
+# Kotlin projects on GitHub
+
+* [Kotlin Udemy](https://github.com/hussien89aa/KotlinUdemy)
+* [Kotlin for Android Developers](https://github.com/antoniolg/Kotlin-for-Android-Developers)
